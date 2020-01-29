@@ -4,8 +4,6 @@ using Android.Support.V7.App;
 using Android.Runtime;
 using Android.Widget;
 using Android.Content;
-using Android.Views;
-using Android.Webkit;
 
 namespace SecondApp
 {
@@ -16,23 +14,28 @@ namespace SecondApp
         {
             base.OnCreate(savedInstanceState);
             // Set our view from the "main" layout resource
-            SetContentView(Resource.Layout.activity_main);
+            SetContentView(Resource.Layout.main_layout);
 
-            var toSecondActivityButton = FindViewById<Button>(Resource.Id.button1);
-            var toWebviewActivityButton = FindViewById<Button>(Resource.Id.button2);
-            var editText = FindViewById<EditText>(Resource.Id.editText1);
+            var toCompass = FindViewById<Button>(Resource.Id.button1);
+            var toAccelerometer = FindViewById<Button>(Resource.Id.button2);
+            var toBattaryInfo = FindViewById<Button>(Resource.Id.button3);
 
-            toSecondActivityButton.Click += delegate
+            toCompass.Click += delegate
             {
-                var text = editText.Text;
-                var intent = new Intent(this, typeof(SecondActivity));
-                intent.PutExtra("editextvalue", text);
+                var intent = new Intent(this, typeof(CompassActivity));
                 StartActivity(intent);
             };
 
-            toWebviewActivityButton.Click += delegate
+            toAccelerometer.Click += delegate
+            {                
+                var intent = new Intent(this, typeof(accelerometerActivity));                
+                StartActivity(intent);
+            };
+
+
+            toBattaryInfo.Click += delegate
             {
-                var intent = new Intent(this, typeof(WebView));
+                var intent = new Intent(this, typeof(BatteryInfo));
                 StartActivity(intent);
             };
         }
